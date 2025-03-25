@@ -1,0 +1,10 @@
+[project]
+name = "subscriber"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pika>=1.3.2",
+    "psycopg>=3.2.6",
+]
