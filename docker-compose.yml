@@ -23,5 +23,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data 
 
+  publisher:
+    build:
+      context: ./publisher
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      PUBLISH_INTERVAL: 2
+      RABBITMQ_USER: admin
+      RABBITMQ_PASS: admin
+
 volumes:
   postgres_data:
