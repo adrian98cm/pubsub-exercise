@@ -17,7 +17,7 @@ def publish_number(channel, number):
     timestamp = datetime.now().isoformat()
     message = json.dumps({"value": number, "timestamp": timestamp})
     channel.basic_publish(exchange='', routing_key='numbers', body=message)
-    print(f"Published: {message}")
+    print(f"Published: {message}", flush=True)
 
 if __name__ == '__main__':
     credentials = pika.PlainCredentials(RABBITMQ_USER, RABBITMQ_PASS)
