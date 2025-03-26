@@ -50,3 +50,9 @@ La solución se divide en cuatro componentes principales:
 ## Escalabilidad
 
 * El sistema se puede escalar fácilmente aumentando el número de contenedores de Publisher y Subscriber usando `docker compose up --scale publisher=N --scale subscriber=M`.
+
+## Demostración del Sistema
+
+A continuación, se muestra una demostración del sistema en funcionamiento:
+
+![Demostración Pub/Sub](demo_pubsub.gif)
