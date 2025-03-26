@@ -22,6 +22,7 @@ services:
       POSTGRES_DB: subscriber_db  
     volumes:
       - postgres_data:/var/lib/postgresql/data 
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
   publisher:
     build:
@@ -31,9 +32,27 @@ services:
       - rabbitmq
     environment:
       RABBITMQ_HOST: rabbitmq
-      PUBLISH_INTERVAL: 2
+      PUBLISH_INTERVAL: 0.5
       RABBITMQ_USER: admin
       RABBITMQ_PASS: admin
+      RETRY_INTERVAL: 5
+
+  subscriber:
+    build:
+      context: ./subscriber
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - postgres
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpassword
+      POSTGRES_DB: subscriber_db
+      RABBITMQ_USER: admin
+      RABBITMQ_PASS: admin
+      RETRY_INTERVAL: 5
 
 volumes:
   postgres_data:
